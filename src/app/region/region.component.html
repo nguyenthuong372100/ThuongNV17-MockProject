@@ -4,7 +4,7 @@
         <div class="country-box mx-2 my-3">
             <p class="text-dark">Country & Region</p>
             <select class="form-select form-select-sm" aria-label=".form-select-sm example" (change)="getSelect($event)">
-                <option *ngFor="let case of caseList" [value]="case.countrycode.iso2">{{case.countryregion}}</option>
+                <option *ngFor="let case of caseList" >{{case.countryregion}}</option>
             </select>
         </div>
     </div>
@@ -27,3 +27,7 @@
         </div>
     </div>
 </div>
+
+<router-outlet></router-outlet>
+
+

@@ -15,7 +15,7 @@ export class CovidService {
 
   getListCase() {
     return this.http.get(
-      'https://master-covid-19-api-laeyoung.endpoint.ainize.ai/jhu-edu/latest'
+      'https://master-covid-19-api-laeyoung.endpoint.ainize.ai/jhu-edu/latest?onlyCountries=true'
     );
   }
 
