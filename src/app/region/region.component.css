@@ -1,0 +1,41 @@
+.region{
+    width: 100%;
+}
+
+.region-detail {
+  border-radius: 10px;
+}
+
+.region-detail i {
+  margin-right: 10px;
+}
+
+.confirmed {
+  background-color: #703cb4;
+}
+
+.recovered {
+  background-color: #087c6c;
+}
+
+.death {
+  background-color: #f01c64;
+}
+
+.fatality {
+  background-color: #c42c67;
+}
+
+select {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: 2px solid;
+  padding-right: 150px;
+}
+
+.region-title p {
+  padding-left: 8px;
+  font-size: 15px;
+  font-weight: 200;
+}

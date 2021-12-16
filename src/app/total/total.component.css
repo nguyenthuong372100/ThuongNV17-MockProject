@@ -1,0 +1,27 @@
+.total{
+width: 100%;
+}
+
+.total-detail {
+  border-radius: 10px;
+}
+
+.total-detail i {
+  margin-right: 10px;
+}
+
+.confirmed {
+  background-color: #703cb4;
+}
+
+.recovered {
+  background-color: #087c6c;
+}
+
+.death {
+  background-color: #f01c64;
+}
+
+.fatality {
+  background-color: #c42c67;
+}
