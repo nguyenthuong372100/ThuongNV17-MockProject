@@ -1,17 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { AngularFireDatabase } from '@angular/fire/compat/database'
 
-@Injectable({
+@Injectable({ 
   providedIn: 'root',
 })
 export class CovidService {
   choice:string = 'AR'
   infor:string = "1"
   time:string = "0"
- 
+  // patienList:any 
   covidSubject = new Subject()
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+    private db:AngularFireDatabase) {}
 
   getChoiceRegion(){
     return this.choice
@@ -81,6 +83,28 @@ export class CovidService {
       total.push(obj)
       return total
     }, [])
+  }
+
+
+  handleInsertPatient(patient:any){
+      this.db.object('patient/'+String(patient.id)).set(patient)
+  }
+
+  getPatients(){
+    return  new Promise((resolve: any, reject: any) => {
+      this.db.list("patient").valueChanges().subscribe(value => {
+        resolve(value)
+      })
+    })
+  }
+  async getListPatient(patien:any){
+    let pt: any
+    await this.getPatients().then(value => {
+      pt = value
+    })
+    // this.patienList = pt
+    patien = pt
+   return patien
   }
  
 }

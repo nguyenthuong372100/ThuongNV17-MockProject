@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -33,7 +36,9 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/leaflet/dist/leaflet.css"
             ],
-            "scripts": ["node_modules/leaflet/dist/leaflet.js"]
+            "scripts": [
+              "node_modules/leaflet/dist/leaflet.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -105,6 +110,16 @@
               "./node_modules/leaflet/dist/leaflet.css"
             ],
             "scripts": []
+          }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "Covid:build:production",
+            "firebaseProject": "covid-mock-angular",
+            "firebaseHostingSite": "covid-mock-angular"
           }
         }
       }

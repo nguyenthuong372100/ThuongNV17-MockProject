@@ -22,6 +22,13 @@ import { ChartComponent } from './total/chart/chart.component';
 import { EmergencyComponent } from './test/emergency/emergency.component';
 import { MatSliderModule } from '@angular/material/slider';
 import {MatButtonModule} from '@angular/material/button';
+
+import { environment } from '../environments/environment';
+
+
+
+
+import { AngularFireModule } from '@angular/fire/compat';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +52,8 @@ import {MatButtonModule} from '@angular/material/button';
     FormsModule,
     LeafletModule,
     ReactiveFormsModule,
-    MatButtonModule
+    MatButtonModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [],
   bootstrap: [AppComponent]

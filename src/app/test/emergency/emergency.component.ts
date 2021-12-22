@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { CovidService } from 'src/services/covid.service';
 
 @Component({
   selector: 'app-emergency',
@@ -9,7 +10,8 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 export class EmergencyComponent implements OnInit {
   emergency!:FormGroup;
   patient:any;
-  constructor(private fb:FormBuilder) { 
+  pt:any
+  constructor(private fb:FormBuilder,private service:CovidService) { 
     this.emergency = this.fb.group({
       name:[],
       age:[],
@@ -20,6 +22,8 @@ export class EmergencyComponent implements OnInit {
       }),
       feeling:[]
     });
+   this.pt =  this.service.getListPatient(this.pt)
+    console.log(this.pt)
   }
 
   ngOnInit(): void {
@@ -47,7 +51,9 @@ export class EmergencyComponent implements OnInit {
     return this.emergency.get('feeling') as FormControl;
   }
   sendPatient(){
-    let patient:any = this.emergency.value;
-    this.patient.push(patient); // dua vao mang
+    let patient:any = {
+      id:Math.floor(Math.random()*1000000),
+      ...this.emergency.value}
+   this.service.handleInsertPatient(patient) // dua vao mang
   }
 }
