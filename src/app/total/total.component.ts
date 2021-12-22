@@ -7,7 +7,7 @@ import { CovidService } from 'src/services/covid.service';
   styleUrls: ['./total.component.css'],
 })
 export class TotalComponent implements OnInit {
-  total: Total= { confirmed: 0, deaths: 0, recovered: 0 };
+  total: Total = { confirmed: 0, deaths: 0, recovered: 0 };
   deathRate!: number;
   constructor(private service: CovidService) {}
 

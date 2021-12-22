@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RegionComponent } from './region.component';
+import { EmergencyComponent } from './emergency.component';
 
-describe('RegionComponent', () => {
-  let component: RegionComponent;
-  let fixture: ComponentFixture<RegionComponent>;
+describe('EmergencyComponent', () => {
+  let component: EmergencyComponent;
+  let fixture: ComponentFixture<EmergencyComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RegionComponent ]
+      declarations: [ EmergencyComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RegionComponent);
+    fixture = TestBed.createComponent(EmergencyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

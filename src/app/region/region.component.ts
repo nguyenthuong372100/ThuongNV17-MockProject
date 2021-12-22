@@ -8,44 +8,77 @@ import { CovidService } from 'src/services/covid.service';
   styleUrls: ['./region.component.css'],
 })
 export class RegionComponent implements OnInit {
-  country: any = {};
-  deathRate!: number;
-  caseList: any = [];
-  countryCode: string = 'VN';
-  constructor(
-    private service: CovidService,
-    private router: Router,
-    private route: ActivatedRoute
-  ) {
-    // get country detail
-    this.service
-      .getCaseByCountry(this.countryCode)
-      .subscribe((response: any) => {
-        this.country = response[0];
-        this.deathRate =
-          Math.round(
-            (this.country.deaths / this.country.confirmed) * 100 * 100
-          ) / 100;
-      });
+  arr!: any
+  choice!: any
+  country!: any
+  rate!: any
+  infor: any = '1'
+  time: any = '0'
+  multi: any = [
 
-    // get list country for select
+    {
+      "name": "Confirmed",
+      "series": []
+    },
+    {
+      "name": "Deaths",
+      "series": []
+    },
+    {
+      "name": "Recovered",
+      "series": []
+    }];
+  constructor(private service: CovidService, private router: Router, private route: ActivatedRoute) {
+    
+  }
+
+ 
+
+  ngOnInit(): void {
     this.service.getListCase().subscribe((response: any) => {
-      this.caseList = response;
-      this.caseList = [...new Set(this.caseList)];
+
+      let newArr = response.filter((item: any) => {
+        return item.countrycode !== undefined
+      })
+
+      this.arr = newArr.reduce((covid: any, current: any) => {
+        if (covid.indexOf(current.countrycode.iso2) === -1) {
+          covid.push(current)
+        }
+        return covid
+      }, [])
     });
+    this.choice = this.service.getChoiceRegion()
+    this.service.getCaseByCountry(this.choice).subscribe((res: any) => {
+      this.country = res[0]
+
+      this.rate = ((this.country.deaths / this.country.confirmed) * 100).toFixed(2)
+    })
   }
 
-  getSelect(event: any) {
-    let index = this.caseList.findIndex(
-      (element: any) => element.countryregion == event.target.value
-    );
-    this.router.navigate(['/region', event.target.value]);
-    this.country = this.caseList[index];
-    this.deathRate =
-    Math.round(
-      (this.country.deaths / this.country.confirmed) * 100 * 100
-    ) / 100;
-  }
 
-  ngOnInit(): void {}
+  getSelect() {
+    this.infor = '1'
+    this.time = '0'
+    this.service.getCaseByCountry(this.choice).subscribe((res: any) => {
+      this.country = res[0]
+      
+      this.rate = ((this.country.deaths / this.country.confirmed) * 100).toFixed(2)
+      this.multi = [
+
+        {
+          "name": "confirmed",
+          "series": []
+        },
+        {
+          "name": "deaths",
+          "series": []
+        },
+        {
+          "name": "recovered",
+          "series": []
+        }];
+    })
+
+  }
 }
